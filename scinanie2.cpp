@@ -10,40 +10,6 @@
 #include <string>
 #include <direct.h>
 
-
-//------------------------------------------------------------------------------
-//FUNKCJE MATEMATYCZNE
-//------------------------------------------------------------------------------
-
-//dzielenie---------------------------------------------------------------------
-double dziel (double D1, double D2)
-{
-double iloraz;
-iloraz=D1*pow(D2,-1);
-return iloraz;       
-}
-//pierwiastkowanie--------------------------------------------------------------
-double pierw (double D1)
-{
-double pierwiastek;
-pierwiastek=pow(D1,0.5);
-return pierwiastek;       
-}
-//kwadratowanie-----------------------------------------------------------------
-double kw (double D1)
-{
-double kwadrat;
-kwadrat=pow(D1,2);
-return kwadrat;       
-}
-//zaokraglanie------------------------------------------------------------------
-double przybliz (double D1)
-{
-double zaokraglenie;
-zaokraglenie=int(D1+0.5);
-return zaokraglenie;
-} 
-
 //------------------------------------------------------------------------------
 //DEKLARACJE ZMIENNYCH
 //------------------------------------------------------------------------------
@@ -90,7 +56,6 @@ double DRX[NATOMS], DRY[NATOMS], DRZ[NATOMS];
 double SUM_EP, SUM_T, SUM_T_up, SUM_T_down, SUM_T_mid, SUM_T_mid_2, SUM_T_walls, SUM_P; 
 double meanEP, meanT, meanT_up, meanT_down, meanT_mid, meanT_mid_2, meanT_walls, meanP, meanPZ, DENOM;
 double scale;
-double CPX, CPY, CPZ, CMPX, CMPY, CMPZ;
 double tau;
 int cleaning;
 double FXRIGHT, FXLEFT, FYRIGHT, FYLEFT, FZUP, FZDOWN, PTX, PTY, PTZ, PVIRX, PVIRY, PVIRZ;
@@ -117,11 +82,10 @@ double counterCR1, counterCR2, counterCR3, counterCRCA;
 double MI1, sumMI1, meanMI1, MI2, sumMI2, meanMI2, MI3, sumMI3, meanMI3, MI4, sumMI4, meanMI4, MI5, sumMI5, meanMI5, MI6, sumMI6, meanMI6, SUMFRIC1, SUMFRIC2, SUMFRIC3, SUMFRIC4, SUMFRIC5, SUMFRIC6;
 double POSZ1, POSZ2, LENGTH, sumL, meanL;
 int iterj, bin, WHZ, GET, binHV;
-int histX[granica], histY[granica], histZ[granica], histZ2[granica], NhistZ[granica], BAR_CHOICE;
+int histX[granica], histY[granica], histZ[granica], histZ2[granica], BAR_CHOICE;
 int termX, termY, termZ, termWall, odczyt_wejscie;
 double mass;
 double calkaBEGIN, DH, meanDH, sumDH;
-double CPXA, CPYA, CPZA, CPXB, CPYB, CPZB, CPXC, CPYC, CPZC;
 double SMX, SMY, SMZ, SMXA, SMYA, SMZA, SMXB, SMYB, SMZB, SMXC, SMYC, SMZC;
 double sumSMX, sumSMY, sumSMZ, sumSMXA, sumSMYA, sumSMZA, sumSMXB, sumSMYB, sumSMZB, sumSMXC, sumSMYC, sumSMZC;
 double meanSMX, meanSMY, meanSMZ, meanSMXA, meanSMYA, meanSMZA, meanSMXB, meanSMYB, meanSMZB, meanSMXC, meanSMYC, meanSMZC;
@@ -149,8 +113,7 @@ double distA, distC;
 double shFA, shFC, sumShFA, sumShFC, meanShFA, meanShFC;
 int cisnienieNaturalne;       
 
-int GR[RANG], WGR[RANG], DISTANCE; 
-double NGR[RANG], NWGR[RANG], TT[RANG];   
+int DISTANCE;    
 int probny_counter, ucount1, ucount2;
 
 int binT, binD, WH, CNT, binP, binL, binRZ;
@@ -195,13 +158,6 @@ double histVXA[TGAP], histVYA[TGAP], histVZA[TGAP], histVA[TGAP];
 double histVXB[TGAP], histVYB[TGAP], histVZB[TGAP], histVB[TGAP];
 double histVXC[TGAP], histVYC[TGAP], histVZC[TGAP], histVC[TGAP];
 
-double VAP, VAPcount, sumVAP, meanVAP;
-double VAP2, VAP2count, sumVAP2, meanVAP2;
-double VAP3, VAP3count, sumVAP3, meanVAP3;
-double VAP4, VAP4count, sumVAP4, meanVAP4;
-double VAP5, VAP5count, sumVAP5, meanVAP5;
-double VAP10, VAP10count, sumVAP10, meanVAP10;
-double VAP20, VAP20count, sumVAP20, meanVAP20;
 int VAPstart, VAPend; 
 int flaga_AP, flaga_AS;
 
@@ -227,14 +183,7 @@ double PedXY, PedYX, PedXZ, PedZX, PedZY, PedYZ;
 
 bool swapped;
 double meanPt;
-double FP1U, FP1D, FP2U, FP2D, FP3U, FP3D, FP4U, FP4D, FP5U, FP5D, FP6U, FP6D; 
-double FP7U, FP7D, FP8U, FP8D, FP9U, FP9D, FP10U, FP10D, FP11U, FP11D, FP12U, FP12D; 
-double FP13U, FP13D, FP14U, FP14D, FP15U, FP15D, FP16U, FP16D, FP17U, FP17D, FP18U, FP18D; 
-double FP19U, FP19D, FP20U, FP20D;
 
-double FPU[PGAP], FPD[PGAP], PMOP[PGAP], sumPMOP[PGAP], meanPMOP[PGAP];
-
-double FPU2[PGAP2], FPD2[PGAP2], PMOP2[PGAP2], PMOP_old[PGAP2], sumPMOP2[PGAP2], meanPMOP2[PGAP2], PTET[PGAP2];
 double ZP;//okresla zasieg obliczania VAP
 int calcGR;
 double PXX_mid, PYY_mid, PZZ_mid, PYZ_mid, PVIR_mid, PVIR_mid2, PVIR_mid3;
@@ -467,21 +416,6 @@ sumPVIR4=0;
 sumSPVIR1=0;
 sumSPVIR2=0;
 sumSPVIR3=0; 
-sumVAP=0;
-meanVAP=0;
-
-sumVAP2=0;
-meanVAP2=0;
-sumVAP3=0;
-meanVAP3=0;
-sumVAP4=0;
-meanVAP4=0;
-sumVAP5=0;
-meanVAP5=0;
-sumVAP10=0;
-meanVAP10=0;
-sumVAP20=0;
-meanVAP20=0;
 
 sumSMX=0;
 sumSMY=0;
@@ -600,10 +534,6 @@ for (int i=0;i<TGAP;i++)
 
 for(int i=0;i<RANG;i++)
 {
-	GR[i]=0;
-	WGR[i]=0;
-	NGR[i]=0;
-	NWGR[i]=0;
 	histT[i]=0;
 	histT_up[i]=0;
 	histT_down[i]=0;
@@ -621,39 +551,12 @@ for(int i=0;i<RANG2;i++)
 	histL[i]=0;
 }
 
-
-for(int kk=0;kk<PGAP2;kk++)	
-{
-sumPMOP2[kk]=0;	
-sumPMOP3[kk]=0;	
-sumPMOP4[kk]=0;	
-sumPMOP5[kk]=0;	
-sumPKYYMOP[kk]=0;
-sumPKYYMOP2[kk]=0;
-PTET[kk]=0;
-
-kinet[kk]=0;
-timkinet[kk]=0;				
-}
 //ODCZYT PARAMETROW WEJSCIOWYCH-------------------------------------------------
 
 double *inputData=new double[dataLines];         
 
-
 if(odczyt_wejscie==1)
-{
-
-double bufor1;
-fstream plikInputVk("inputVk.txt", ios::in | ios::out );      
-plikInputVk >> bufor1;
-VSH_K=bufor1/158;
-plikInputVk.close();	
-	
-fstream plikInputPk("inputPk.txt", ios::in | ios::out );      
-plikInputPk >> bufor1;
-P0_K=bufor1/42.133;
-plikInputPk.close();	
-	
+{	
 	
 fstream plikOgolnyInput("inputGeneral.txt", ios::in | ios::out );	
 
@@ -663,24 +566,24 @@ fstream plikOgolnyInput("inputGeneral.txt", ios::in | ios::out );
 	}
 	plikOgolnyInput.close();
 
-	VSH=inputData[0]/158;
-	P0=inputData[1]/42.133;
+	READ=inputData[0];
 	
-	DT=inputData[2];
-	RUN=inputData[3];
-	cleaning=inputData[4];
-	a1=inputData[5];
-	a2=inputData[6];
+	VSH=inputData[1]/158;
+	VSH_K=inputData[2]/158;
 	
-	BARO4=inputData[7];
-	BARO5=inputData[8];
-	beta=inputData[9];
-	gam2=inputData[10];
-	READ=inputData[11];
-	wczytaj_sciany=inputData[12];
-	granica_odczytu_scian=inputData[13];
-	GAP=inputData[14];
+	P0=inputData[3]/42.133;
+	P0_K=inputData[4]/42.133;
+	
+	DT=inputData[5];
+	RUN=inputData[6];
+	cleaning=inputData[7];
+	
+	a1=inputData[8];
+	a2=inputData[9];
+
 }
+BARO4=1; BARO5=1; beta=1; gam2=300;
+
 VSH=round(1000*VSH)/1000;
 VSH_K=round(1000*VSH_K)/1000;
 P0=round(100*P0)/100;
@@ -774,9 +677,9 @@ if(ZerowaniePedu==1)
 {    
 	for (int i=0; i<NATOMS; i++)
     {  
-    VX[i]=VX[i]-dziel(TOTPX,NATOMS);
-    VY[i]=VY[i]-dziel(TOTPY,NATOMS);
-    VZ[i]=VZ[i]-dziel(TOTPZ,NATOMS);   
+    VX[i]=VX[i]-TOTPX*pow(NATOMS,-1);
+    VY[i]=VY[i]-TOTPY*pow(NATOMS,-1);
+    VZ[i]=VZ[i]-TOTPZ*pow(NATOMS,-1);   
     }
 }
 
@@ -1019,9 +922,9 @@ TOTPX=0; TOTPY=0; TOTPZ=0;
 	  
     for (int i=0; i<wskA; i++)
     {  
-    VX[i]=VX[i]-dziel(TOTPX,NATIN); 
-	VY[i]=VY[i]-dziel(TOTPY,NATIN); 
-	VZ[i]=VZ[i]-dziel(TOTPZ,NATIN);   
+    VX[i]=VX[i]-TOTPX*pow(NATIN,-1); 
+	VY[i]=VY[i]-TOTPY*pow(NATIN,-1); 
+	VZ[i]=VZ[i]-TOTPZ*pow(NATIN,-1);   
     }
 
 TOTPX=0; TOTPY=0; TOTPZ=0;
@@ -1057,9 +960,9 @@ TOTPX=0; TOTPY=0; TOTPZ=0;
 	  
     for (int i=wskA; i<wskB; i++)
     {  
-    VX[i]=VX[i]-dziel(TOTPX,NATIN); 
-	VY[i]=VY[i]-dziel(TOTPY,NATIN); 
-	VZ[i]=VZ[i]-dziel(TOTPZ,NATIN);   
+    VX[i]=VX[i]-TOTPX*pow(NATIN,-1); 
+	VY[i]=VY[i]-TOTPY*pow(NATIN,-1); 
+	VZ[i]=VZ[i]-TOTPZ*pow(NATIN,-1);   
     }
 
 TOTPX=0; TOTPY=0; TOTPZ=0;
@@ -1096,9 +999,9 @@ TOTPX=0; TOTPY=0; TOTPZ=0;
 	  
     for (int i=wskB; i<NATOMS; i++)
     {  
-    VX[i]=VX[i]-dziel(TOTPX,NATIN); 
-	VY[i]=VY[i]-dziel(TOTPY,NATIN); 
-	VZ[i]=VZ[i]-dziel(TOTPZ,NATIN);   
+    VX[i]=VX[i]-TOTPX*pow(NATIN,-1); 
+	VY[i]=VY[i]-TOTPY*pow(NATIN,-1); 
+	VZ[i]=VZ[i]-TOTPZ*pow(NATIN,-1);   
     }
 
 
@@ -1379,105 +1282,6 @@ VXH2[i]=VXH1[i]; VYH2[i]=VYH1[i]; VZH2[i]=VZH1[i];
 }
 
 //------------------------------------------------------------------------------
-
-CPX=0;
-CPY=0;
-CPZ=0;
-
-CPXA=0;
-CPYA=0;
-CPZA=0;
-
-CPXB=0;
-CPYB=0;
-CPZB=0;
-
-CPXC=0;
-CPYC=0;
-CPZC=0;
-
-SMX=0;
-SMY=0;
-SMZ=0;
-
-SMXA=0;
-SMYA=0;
-SMZA=0;
-
-SMXB=0;
-SMYB=0;
-SMZB=0;
-
-SMXC=0;
-SMYC=0;
-SMZC=0;
-
-CMPX=0;
-CMPY=0;
-CMPZ=0;
-
-for (int ii=0;ii<NATOMS;ii++)
-{
-	if(ii<wskA)
-	{
-	CPXA=CPXA+VX[ii];
-	CPYA=CPYA+VY[ii];
-	CPZA=CPZA+VZ[ii];	
-	
-	SMXA=SMXA+RX[ii];
-	SMYA=SMYA+RY[ii];
-	SMZA=SMZA+RZ[ii];
-	}
-	else if(ii>=wskB)
-	{
-	CPXC=CPXC+VX[ii];
-	CPYC=CPYC+VY[ii];
-	CPZC=CPZC+VZ[ii];	
-	
-	SMXC=SMXC+RX[ii];
-	SMYC=SMYC+RY[ii];
-	SMZC=SMZC+RZ[ii];
-	}
-	else
-	{
-	CPXB=CPXB+VX[ii];
-	CPYB=CPYB+VY[ii];
-	CPZB=CPZB+VZ[ii];
-	
-	SMXB=SMXB+RX[ii];
-	SMYB=SMYB+RY[ii];
-	SMZB=SMZB+RZ[ii];	
-	}
-	
-CPX=CPX+VX[ii];
-CPY=CPY+VY[ii];
-CPZ=CPZ+VZ[ii];
-
-SMX=SMX+RX[ii];
-SMY=SMY+RY[ii];
-SMZ=SMZ+RZ[ii];
-
-CMPX=CMPX+(VZ[ii]*RY[ii]-VY[ii]*RZ[ii]);
-CMPY=CMPY+(VX[ii]*RZ[ii]-VZ[ii]*RX[ii]);
-CMPZ=CMPZ+(VY[ii]*RX[ii]-VX[ii]*RY[ii]);
-}
-
-SMX=SMX*pow(NATOMS,-1);
-SMY=SMY*pow(NATOMS,-1);
-SMZ=SMZ*pow(NATOMS,-1);
-
-SMXA=SMXA*pow(NATOMS,-1);
-SMYA=SMYA*pow(NATOMS,-1);
-SMZA=SMZA*pow(NATOMS,-1);
-
-SMXB=SMXB*pow(NATOMS,-1);
-SMYB=SMYB*pow(NATOMS,-1);
-SMZB=SMZB*pow(NATOMS,-1);
-
-SMXC=SMXC*pow(NATOMS,-1);
-SMYC=SMYC*pow(NATOMS,-1);
-SMZC=SMZC*pow(NATOMS,-1);
-//------------------------------------------------------------------------------
 //ZAPIS PARAMETROW SYMULACJI
 //------------------------------------------------------------------------------
 
@@ -1509,11 +1313,6 @@ parametry<</*15*/g<<endl;
 parametry<</*16*/rho<<endl;
 parametry<</*17*/Volume<<endl;
 parametry<</*18*/P0<<endl;
-parametry<</*19*/Qp<<endl;
-parametry<</*20*/tauH<<endl;
-parametry<</*21*/tau<<endl;
-parametry<</*22*/Q_in<<endl;
-parametry<</*23*/Q<<endl;
 parametry<</*24*/RCUT<<endl;
 parametry<</*25*/shift<<endl;
 parametry<</*26*/SKIN<<endl;
@@ -1533,26 +1332,6 @@ parametry<</*33*/VSH<<endl;
 parametry<</*34*/SHEAR<<endl;
 parametry<</*35*/BAR_CHOICE<<endl;
 parametry<</*36*/StartVelocities<<endl;
-parametry<</*37*/XPERIOD<<endl;
-parametry<</*38*/YPERIOD<<endl;
-parametry<</*39*/ZPERIOD<<endl;
-parametry<</*40*/TERM<<endl;
-parametry<</*41*/termWall<<endl;
-parametry<</*42*/TETF<<endl;
-parametry<</*43*/BAR<<endl;
-parametry<</*44*/CONSTR<<endl;
-parametry<</*45*/DIFINT<<endl;
-parametry<</*46*/DIFCON<<endl;
-parametry<</*47*/termX<<endl;
-parametry<</*48*/termY<<endl;
-parametry<</*49*/termZ<<endl;
-parametry<</*50*/cax<<endl;
-parametry<</*51*/cay<<endl;
-parametry<</*52*/caz<<endl;
-parametry<</*53*/omega<<endl;
-parametry<</*54*/beta<<endl;
-parametry<</*55*/gam1<<endl;
-parametry<</*56*/gam2<<endl;
 parametry<</*57*/P0<<endl;
 parametry<</*58*/P0_K<<endl;
 parametry<</*59*/VSH<<endl;
@@ -1562,21 +1341,10 @@ parametry.flush();
 parametry.close();
 
 //------------------------------------------------------------------------------
-deltay=30*pow(PGAP2,-1);
-
-	for(int kk=0;kk<PGAP2;kk++)	
-	{
-	POZSURF[kk]=deltay*(kk-0.5*PGAP2);
-	kinet[kk]=0;
-	timkinet[kk]=0;
-	}
-	
+deltay=30*pow(PGAP2,-1);	
 //------------------------------------------------------------------------------
 
 
-
-
-cout<<CPXC<<"   "<<CPYC<<"   "<<CPZC<<endl;
 cout<<"*****************************************************************"<<endl;
 cout<<" "<<endl;
 
@@ -1656,7 +1424,7 @@ if(n==t_test)
 	
 	cout<<"czas rozpoczecia petli glownej [s]: "<<t1/sekunda<<endl;
 	cout<<"czas obliczania pierszej serii [s]: "<<(t2-t1)/sekunda<<endl;
-	cout<<"Szacowany czas trwania obliczen [h]: "<<t3/godzina/1000<<endl;
+	cout<<"Szacowany czas trwania obliczen [d]: "<<t3/godzina/1000<<endl;
 	
 }
 
@@ -1667,7 +1435,7 @@ fstream plik_time(nazwa_time, ios::out );
 	plik_time<<asctime(timeinfo)<<endl;
 	plik_time<<"czas rozpoczecia petli glownej [s]: "<<t1/sekunda<<endl;
 	plik_time<<"czas obliczania pierszej serii [s]: "<<(t2-t1)/sekunda<<endl;
-	plik_time<<"Szacowany czas trwania obliczen [h]: "<<t3/godzina/1000<<endl;
+	plik_time<<"Szacowany czas trwania obliczen [d]: "<<t3/godzina/1000<<endl;
     //zamkniecie pliku
     plik_time.close();
     }
@@ -1829,22 +1597,6 @@ sumPVIR4=0;
 sumSPVIR1=0;
 sumSPVIR2=0;
 sumSPVIR3=0;
-
-sumVAP=0;
-meanVAP=0; 
-
-sumVAP2=0;
-meanVAP2=0;
-sumVAP3=0;
-meanVAP3=0;
-sumVAP4=0;
-meanVAP4=0;
-sumVAP5=0;
-meanVAP5=0;
-sumVAP10=0;
-meanVAP10=0;
-sumVAP20=0;
-meanVAP20=0;
 
 sumPVIR_mid1=0;
 sumPVIR_mid2=0;
@@ -2046,32 +1798,6 @@ meanVolum2=sumVolum2*pow(DENOM,-1);
 meanVolum3=sumVolum3*pow(DENOM,-1);
 
 //NEWTON EQUATION - VERTEL LEAP FROG--------------------------------------------	
-//left right lists--------------------------------------------------------------
-for(int i=0;i<NATOMS;i++)
-{
-	LX[NATOMS]=0;
-	LY[NATOMS]=0;
-	//1-mniejszy od 0; 2-wiekszy od 0;
-	if (RX[i]<0)
-	{
-	LX[i]=1;	
-	}
-	else if(RX>0)
-	{
-	LX[i]=2;	
-	}
-	
-	if (RY[i]<0)
-	{
-	LY[i]=1;	
-	}
-	else if(RY>0)
-	{
-	LY[i]=2;	
-	}
-
-}
-
 //verlet list-------------------------------------------------------------------
 int nmaksimum;
 nmaksimum=NATOMS;
@@ -2117,11 +1843,6 @@ PXX=0; PYY=0; PZZ=0; PXY=0; PYX=0; PXZ=0; PZX=0; PZY=0; PYZ=0; PVIR=0;
 PXX_mid=0; PYY_mid=0; PZZ_mid=0; PYZ_mid=0;
 FUP2=0; FDOWN2=0; FXLEFT=0; FXRIGHT=0; FYLEFT=0; FYRIGHT=0;
 F_up=0; F_down=0; FBXD=0; FBYD=0; FBXU=0; FBYU=0;
-
-FP1U=0; FP1D=0; FP2U=0; FP2D=0; FP3U=0; FP3D=0; FP4U=0; FP4D=0; FP5U=0; FP5D=0; 
-FP6U=0; FP6D=0; FP7U=0; FP7D=0; FP8U=0; FP8D=0; FP9U=0; FP9D=0; FP10U=0; FP10D=0;
-FP11U=0; FP11D=0; FP12U=0; FP12D=0; FP13U=0; FP13D=0; FP14U=0; FP14D=0; FP15U=0; FP15D=0; 
-FP16U=0; FP16D=0; FP17U=0; FP17D=0; FP18U=0; FP18D=0; FP19U=0; FP19D=0; FP20U=0; FP20D=0;
 	
 
 UAA=0;UA=0;UBB=0;UAB=0;UBC=0;UCC=0;UC=0;
@@ -2960,72 +2681,6 @@ if(sumk==0)
 {
 liczsumk=liczsumk+1;
 }
-	
-//Vol av------------------------------------------------------------------------	
-VAPstart=0;
-VAPend=PGAP;
-VAP=0;
-VAPcount=0;
-VAP2=0;
-VAP2count=0;
-VAP3=0;
-VAP3count=0;
-VAP4=0;
-VAP4count=0;
-VAP5=0;
-VAP5count=0;
-VAP10=0;
-VAP10count=0;
-VAP20=0;
-VAP20count=0;
-for(int iii=VAPstart; iii<VAPend; iii++)
-{
-	VAP=VAP+PMOP[iii];
-	VAPcount=VAPcount+1; 	
-	
-	if((iii+1)%2==0)
-	{
-	VAP2=VAP2+PMOP[iii];
-	VAP2count=VAP2count+1; 	
-	}
-	if((iii+1)%3==0)
-	{
-	VAP3=VAP3+PMOP[iii];
-	VAP3count=VAP3count+1; 	
-	}
-	if((iii+1)%4==0)
-	{
-	VAP4=VAP4+PMOP[iii];
-	VAP4count=VAP4count+1; 	
-	}
-	if((iii+1)%5==0)
-	{
-	VAP5=VAP5+PMOP[iii];
-	VAP5count=VAP5count+1; 	
-	}
-	if((iii+1)%10==0)
-	{
-	VAP10=VAP10+PMOP[iii];
-	VAP10count=VAP10count+1; 	
-	}
-	if(iii==0.5*PGAP)
-	{
-	VAP20=VAP20+PMOP[iii];
-	VAP20count=VAP20count+1; 	
-	}
-	
-}	
-
-VAP=VAP*pow(VAPcount,-1);
-
-VAP2=VAP2*pow(VAP2count,-1);
-VAP3=VAP3*pow(VAP3count,-1);
-VAP4=VAP4*pow(VAP4count,-1);
-VAP5=VAP5*pow(VAP5count,-1);
-VAP10=VAP10*pow(VAP10count,-1);
-VAP20=VAP20*pow(VAP20count,-1);
-
-	
 //------------------------------------------------------------------------------	
 	sumP=sumP+Pt;
 	
@@ -3217,15 +2872,6 @@ sumEPC_inter=sumEPC_inter+EPC_inter;
 sumEPC_w_down=sumEPC_w_down+EPC_w_down;
 sumEPC_w_up=sumEPC_w_up+EPC_w_up;
 
-sumVAP=sumVAP+VAP;
-sumVAP2=sumVAP2+VAP2;
-sumVAP3=sumVAP3+VAP3;
-sumVAP4=sumVAP4+VAP4;
-sumVAP5=sumVAP5+VAP5;
-sumVAP10=sumVAP10+VAP10;
-sumVAP20=sumVAP20+VAP20;
-
-
 meanEP=SUM_EP*pow(DENOM,-1);
 meanT=SUM_T*pow(DENOM,-1);
 meanT_up=SUM_T_up*pow(DENOM,-1);
@@ -3246,13 +2892,6 @@ meanEPC_w_up=sumEPC_w_up*pow(DENOM,-1);
 
 meanDR=meanDR*pow(DENOM,-1)*pow(NATOMS,-1);
 
-meanVAP=sumVAP*pow(DENOM,-1);
-meanVAP2=sumVAP2*pow(DENOM,-1);
-meanVAP3=sumVAP3*pow(DENOM,-1);
-meanVAP4=sumVAP4*pow(DENOM,-1);
-meanVAP5=sumVAP5*pow(DENOM,-1);
-meanVAP10=sumVAP10*pow(DENOM,-1);
-meanVAP20=sumVAP20*pow(DENOM,-1);
 //------------------------------------------------------------------------------
 
 sumPXX=sumPXX+PXX;
@@ -3311,79 +2950,6 @@ sumPT2=sumPT2+PT2;
 
 meanPT1=sumPT1*pow(DENOM,-1);
 meanPT2=sumPT2*pow(DENOM,-1);
-
-//constant of motions-----------------------------------------------------------
-CPX=0; CPY=0; CPZ=0; CPXA=0; CPYA=0; CPZA=0; CPXB=0; CPYB=0; CPZB=0;
-CPXC=0; CPYC=0; CPZC=0; SMX=0; SMY=0; SMZ=0; SMXA=0; SMYA=0; SMZA=0; 
-SMXB=0; SMYB=0; SMZB=0; SMXC=0; SMYC=0; SMZC=0; CMPX=0; CMPY=0; CMPZ=0;
-
-for (int ii=0;ii<NATOMS;ii++)
-{
-	if(ii<wskA)
-	{
-	CPXA=CPXA+VX[ii]; CPYA=CPYA+VY[ii]; CPZA=CPZA+VZ[ii];	
-	SMXA=SMXA+RX[ii]; SMYA=SMYA+RY[ii]; SMZA=SMZA+RZ[ii];
-	}
-	else if(ii>=wskB)
-	{
-	CPXC=CPXC+VX[ii]; CPYC=CPYC+VY[ii]; CPZC=CPZC+VZ[ii];	
-	SMXC=SMXC+RX[ii]; SMYC=SMYC+RY[ii]; SMZC=SMZC+RZ[ii];
-	}
-	else
-	{
-	CPXB=CPXB+VX[ii]; CPYB=CPYB+VY[ii]; CPZB=CPZB+VZ[ii];
-	SMXB=SMXB+RX[ii]; SMYB=SMYB+RY[ii]; SMZB=SMZB+RZ[ii];	
-	}
-	
-CPX=CPX+VX[ii]; CPY=CPY+VY[ii]; CPZ=CPZ+VZ[ii];
-SMX=SMX+RX[ii]; SMY=SMY+RY[ii]; SMZ=SMZ+RZ[ii];
-
-CMPX=CMPX+(VZ[ii]*RY[ii]-VY[ii]*RZ[ii]);
-CMPY=CMPY+(VX[ii]*RZ[ii]-VZ[ii]*RX[ii]);
-CMPZ=CMPZ+(VY[ii]*RX[ii]-VX[ii]*RY[ii]);
-}
-
-SMX=SMX*pow(NATOMS,-1);
-SMY=SMY*pow(NATOMS,-1);
-SMZ=SMZ*pow(NATOMS,-1);
-
-SMXA=SMXA*pow(NATOMS,-1);
-SMYA=SMYA*pow(NATOMS,-1);
-SMZA=SMZA*pow(NATOMS,-1);
-
-SMXB=SMXB*pow(NATOMS,-1);
-SMYB=SMYB*pow(NATOMS,-1);
-SMZB=SMZB*pow(NATOMS,-1);
-
-SMXC=SMXC*pow(NATOMS,-1);
-SMYC=SMYC*pow(NATOMS,-1);
-SMZC=SMZC*pow(NATOMS,-1);
-
-sumSMX=sumSMX+SMX;
-sumSMY=sumSMY+SMY;
-sumSMZ=sumSMZ+SMZ;
-sumSMXA=sumSMXA+SMXA;
-sumSMYA=sumSMYA+SMYA; 
-sumSMZA=sumSMZA+SMZA; 
-sumSMXB=sumSMXB+SMXB;
-sumSMYB=sumSMYB+SMYB; 
-sumSMZB=sumSMZB+SMZB; 
-sumSMXC=sumSMXC+SMXC; 
-sumSMYC=sumSMYC+SMYC; 
-sumSMZC=sumSMZC+SMZC;
-
-meanSMX=sumSMX*pow(DENOM,-1);
-meanSMY=sumSMY*pow(DENOM,-1);
-meanSMZ=sumSMZ*pow(DENOM,-1);
-meanSMXA=sumSMXA*pow(DENOM,-1);
-meanSMYA=sumSMYA*pow(DENOM,-1); 
-meanSMZA=sumSMZA*pow(DENOM,-1); 
-meanSMXB=sumSMXB*pow(DENOM,-1);
-meanSMYB=sumSMYB*pow(DENOM,-1); 
-meanSMZB=sumSMZB*pow(DENOM,-1); 
-meanSMXC=sumSMXC*pow(DENOM,-1); 
-meanSMYC=sumSMYC*pow(DENOM,-1); 
-meanSMZC=sumSMZC*pow(DENOM,-1);
 //------------------------------------------------------------------------------	
 sumShFA=sumShFA+shFA;
 sumShFC=sumShFC+shFC;
@@ -3461,10 +3027,10 @@ if(LOOP%JUMP2==0)
 //------------------------------------------------------------------------------        
 przebiegi.precision(16);
 przebiegi<<
-/*1*/n<<				"  "		<</*2*/tim<<					"  "		<</*3*/T<<"  "<<
-/*4*/meanT<<			"  "		<</*5*/PW<<						"  "		<</*6*/meanPW<<"  "<<
-/*7*/LENGTH<<			"  "		<</*8*/meanL<<					"  "		<</*9*/MI<<"  "<<
-/*10*/meanMI<<			"  "		<</*11*/0.5*(VYC-VYA)<<			"  "		<</*12*/BX*BY<<"\n";
+/*1*/n<<";"<</*2*/tim<<";"<</*3*/T<<";"<<
+/*4*/meanT<<";"<</*5*/PW<<";"<</*6*/meanPW<<";"<<
+/*7*/LENGTH<<";"<</*8*/meanL<<";"<</*9*/MI<<";"<<
+/*10*/meanMI<<";"<</*11*/0.5*(VYC-VYA)<<";"<</*12*/BX*BY<<"; \n";
 przebiegi.flush();
 
 cout<<"Wykonano: "<<n<<" krokow czasowych z: "<<RUN<< " wszystkich krokow..."<<endl;
@@ -3548,24 +3114,6 @@ fstream plik_poloz(nazwa_ostatnie_pozycje, ios::out );
             reszta_wejscie_new.close();
     }
 //------------------------------------------------------------------------------
-
-                for (int i=0; i<RANG; i++) 
-			{
-				NWGR[i]=WGR[i];
-				NGR[i]=GR[i];
-				
-                TT[i]=i*pow(bin,-1);
-                
-				NWGR[i]=NWGR[i]*pow(RUN,-1)*pow(NATOMS,-1);
-				NGR[i]=NGR[i]*pow(RUN,-1)*pow(NATOMS-2*wskA,-1);
-                NWGR[i]=NWGR[i]*pow((4*M_PI*(TT[i]*TT[i])*rho*(pow(bin,-1))),-1);
-                NGR[i]=NGR[i]*pow((4*M_PI*(TT[i]*TT[i])*rho*(pow(bin,-1))),-1);
-                
-                NhistZ[i]=histZ[i]*pow(RUN,-1);
-            }
-
-GR[0]=0; WGR[0]=0; NGR[0]=0; NWGR[0]=0;
-
 for(int i=0;i<TGAP;i++)
 {
 	if(tabDenomRTZ[i]>0){MEAN_RTZ2[i]=SUM_RTZ[i]*pow(tabDenomRTZ[i],-1);}
@@ -3593,19 +3141,17 @@ for(int i=0;i<TGAP;i++)
 	else{MEAN_RTVZ2[i]=0;}
 }
 
-
 for(int i=0;i<TGAP;i++)
 {
 //------------------------------------------------------------------------------	
 v_prof.precision(16);
 v_prof<<
-/*1*/(i-TGAP*0.5)*resol<<			"  "<<
-/*2*/MEAN_RTVX[i]<<	"  "<</*3*/MEAN_RTVY[i]<<		"  "<</*4*/MEAN_RTVZ[i]<<"  "<<"\n";
+/*1*/(i-TGAP*0.5)*resol<<";"<</*2*/MEAN_RTVX[i]<<";"<</*3*/MEAN_RTVY[i]<<";"<</*4*/MEAN_RTVZ[i]<<";"<<"; \n";
 v_prof.flush();
 //------------------------------------------------------------------------------	
 T_prof.precision(16);
 T_prof<<
-/*1*/(i-TGAP*0.5)*resol<<"  "<</*2*/MEAN_RTZ_2[i]<<"\n";
+/*1*/(i-TGAP*0.5)*resol<<";"<</*2*/MEAN_RTZ_2[i]<<"; \n";
 T_prof.flush();
 //------------------------------------------------------------------------------
 }
@@ -3613,23 +3159,20 @@ T_prof.flush();
 for (int i=0;i<RANG; i++)
 {
 H_prof.precision(16);
-H_prof<</*1*/(i-0.5*RANG)*pow(bin,-1)<<"   "<</*2*/histZ[i]*pow(RUN-cleaning,-1)<<"\n";
+H_prof<</*1*/(i-0.5*RANG)*pow(bin,-1)<<";"<</*2*/histZ[i]*pow(RUN-cleaning,-1)<<"; \n";
 H_prof.flush();
 }
 //------------------------------------------------------------------------------   
-
 for (int i=0;i<RANG2; i++)
 {
 hist_P_L.precision(16);
-hist_P_L<</*4*/(i)*pow(binP,-1)+Pb<<"   "<</*5*/histP[i]<<"   "<</*6*/(i)*pow(binL,-1)+L0<<"   "<</*7*/histL[i]<<"\n";
+hist_P_L<</*4*/(i)*pow(binP,-1)+Pb<<";"<</*5*/histP[i]<<";"<</*6*/(i)*pow(binL,-1)+L0<<";"<</*7*/histL[i]<<"; \n";
 hist_P_L.flush();
 }
 //------------------------------------------------------------------------------
-
 v_prof.close(); T_prof.close(); 
 H_prof.close(); 	ostatnie_wartosci.close();
 hist_P_L.close();
-
 //------------------------------------------------------------------------------
 
 cout<<"koniec"<<endl;

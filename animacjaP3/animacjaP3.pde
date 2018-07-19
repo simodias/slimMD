@@ -62,7 +62,8 @@ void draw()
   }
   if (lineX == null || lineY == null || lineZ == null) 
   {
-    noLoop();
+    setup();
+    //noLoop();
   } else 
   {
     String[] piecesX = split(lineX, " ");

@@ -1,5 +1,5 @@
-Wed Jul 18 01:16:06 2018
+Thu Jul 19 23:05:28 2018
 
-czas rozpoczecia petli glownej [s]: 0.000311
-czas obliczania pierszej serii [s]: 0.134409
-Szacowany czas trwania obliczen [h]: 6.22264e-005
+czas rozpoczecia petli glownej [s]: 0.000323
+czas obliczania pierszej serii [s]: 0.164068
+Szacowany czas trwania obliczen [d]: 7.59574e-005
